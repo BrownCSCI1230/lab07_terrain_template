@@ -1,2 +1,3 @@
 # Lab 7: Terrain
-This is a placeholder readme.
+
+Welcome to Lab 7 Terrain! The handout for the lab is located [here](https://browncsci1230.github.io/labs/lab7).
