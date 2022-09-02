@@ -19,9 +19,6 @@ find_package(Qt6 REQUIRED COMPONENTS OpenGL)
 find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 
-# Allows you to include files from within those directories, without prefixing their filepaths
-include_directories(src)
-
 # Specifies .cpp and .h files to be passed to the compiler
 add_executable(${PROJECT_NAME}
   src/main.cpp
@@ -64,13 +61,6 @@ if (WIN32)
   target_link_libraries(${PROJECT_NAME} PRIVATE
     opengl32
     glu32
-  )
-endif()
-
-# GLEW: this provides support for Linux
-if (UNIX AND NOT APPLE)
-  target_link_libraries(${PROJECT_NAME} PRIVATE
-    GLU
   )
 endif()
 
