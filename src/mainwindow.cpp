@@ -1,6 +1,5 @@
 #include "mainwindow.h"
-
-#include<QHBoxLayout>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow()
 {
@@ -11,7 +10,5 @@ MainWindow::MainWindow()
     this->setLayout(container);
 }
 
-MainWindow::~MainWindow()
-{
-}
+MainWindow::~MainWindow() {}
 

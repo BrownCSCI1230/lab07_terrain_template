@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QSurfaceFormat::setDefaultFormat(fmt);
 
     MainWindow w;
-    //w.resize(w.sizeHint());
+    // w.resize(w.sizeHint());
     w.resize(600, 500);
     int desktopArea = QGuiApplication::primaryScreen()->size().width() *
                       QGuiApplication::primaryScreen()->size().height();

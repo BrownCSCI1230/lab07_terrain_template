@@ -1,5 +1,4 @@
-#ifndef TERRAINGENERATOR_H
-#define TERRAINGENERATOR_H
+#pragma once
 
 #include <vector>
 #include "glm/glm.hpp"
@@ -37,5 +36,3 @@ private:
     // Computes Perlin noise at a point in the infinite vertex grid
     float computePerlin(float x, float y);
 };
-
-#endif // TERRAINGENERATOR_H

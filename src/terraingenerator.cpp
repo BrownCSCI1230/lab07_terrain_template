@@ -3,10 +3,9 @@
 #include <cmath>
 #include "glm/glm.hpp"
 
-
 TerrainGenerator::TerrainGenerator()
 {
-    //Task 8: Turn of wireframe shading
+    // Task 8: Turn of wireframe shading
     m_wireshade = true;
 
     // Define resolution of terrain generation
@@ -61,23 +60,23 @@ glm::vec3 TerrainGenerator::getPosition(int row, int col) {
     float y = 1.0 * col / m_resolution;
     float z;
 
-    //Task 6 Modify this call to produce noise of a different frequency
+    // Task 6 Modify this call to produce noise of a different frequency
     z = computePerlin(5*x,5*y);
 
-    //Task 7 Combine multiple different octaves of noise to produce fractal perlin noise
+    // Task 7 Combine multiple different octaves of noise to produce fractal perlin noise
 
     return glm::vec3(x,y,z);
 }
 
 glm::vec3 TerrainGenerator::getNormal(int row, int col) {
-    //Task 9: Compute the average normal for the given input indicies
+    // Task 9: Compute the average normal for the given input indicies
 
     // return up as placeholder
     return glm::vec3(0,0,1);
 }
 
 glm::vec3 TerrainGenerator::getColor(glm::vec3 normal, glm::vec3 position) {
-    //Task 10: Compute the Color as a function of the normal and position
+    // Task 10: Compute the Color as a function of the normal and position
 
     // return white as placeholder
     return glm::vec3(1,1,1);
@@ -94,7 +93,7 @@ void addPointToVector(glm::vec3 point, std::vector<float>& vector) {
     vector.push_back(point.z);
 }
 
-//Uses position normal and color information to generate geometry
+// Uses position normal and color information to generate geometry
 std::vector<float> TerrainGenerator::generateTerrain() {
     std::vector<float> verts;
     verts.reserve(m_resolution * m_resolution * 6);
@@ -117,10 +116,10 @@ std::vector<float> TerrainGenerator::generateTerrain() {
             glm::vec3 n3 = getNormal(x2,y2);
             glm::vec3 n4 = getNormal(x1,y2);
 
-            //tris 1
-            //x1y1z1
-            //x2y1z2
-            //x2y2z3
+            // tris 1
+            // x1y1z1
+            // x2y1z2
+            // x2y2z3
             addPointToVector(p1, verts);
             addPointToVector(n1, verts);
             addPointToVector(getColor(n1, p1), verts);
@@ -133,10 +132,10 @@ std::vector<float> TerrainGenerator::generateTerrain() {
             addPointToVector(n3, verts);
             addPointToVector(getColor(n3, p3), verts);
 
-            //tris 2
-            //x1y1z1
-            //x2y2z3
-            //x1y2z4
+            // tris 2
+            // x1y1z1
+            // x2y2z3
+            // x1y2z4
             addPointToVector(p1, verts);
             addPointToVector(n1, verts);
             addPointToVector(getColor(n1, p1), verts);

@@ -9,17 +9,11 @@
 #include <iostream>
 #include "glm/gtc/matrix_transform.hpp"
 
-
 GLWidget::GLWidget(QWidget *parent)
     : QOpenGLWidget(parent), m_angleX(0), m_angleY(0), m_zoom(1.0)
-{
-}
+{}
 
-GLWidget::~GLWidget()
-{
-
-}
-
+GLWidget::~GLWidget() {}
 
 void GLWidget::initializeGL()
 {
