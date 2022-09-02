@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include "glwidget.h"
@@ -15,4 +14,3 @@ public:
 private:
     GLWidget *glWidget;
 };
-#endif // MAINWINDOW_H

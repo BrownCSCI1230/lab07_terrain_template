@@ -1,5 +1,4 @@
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#pragma once
 
 #include "GL/glew.h"
 #include <QOpenGLWidget>
@@ -46,5 +45,3 @@ private:
     float m_zoom;
 
 };
-
-#endif // GLWIDGET_H
