@@ -60,10 +60,10 @@ glm::vec3 TerrainGenerator::getPosition(int row, int col) {
     float y = 1.0 * col / m_resolution;
     float z;
 
-    // Task 6 Modify this call to produce noise of a different frequency
+    // Task 6: Modify this call to produce noise of a different frequency
     z = computePerlin(5*x,5*y);
 
-    // Task 7 Combine multiple different octaves of noise to produce fractal perlin noise
+    // Task 7: Combine multiple different octaves of noise to produce fractal perlin noise
 
     return glm::vec3(x,y,z);
 }
