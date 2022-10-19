@@ -155,7 +155,7 @@ glm::vec3 TerrainGenerator::getColor(glm::vec3 normal, glm::vec3 position) {
     // Task 10: compute color as a function of the normal and position
 
     // Return white as placeholder
-    return white;
+    return glm::vec3(1,1,1);
 }
 
 // Computes the intensity of Perlin noise at some point
