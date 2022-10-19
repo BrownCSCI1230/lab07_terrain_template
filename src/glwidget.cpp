@@ -27,8 +27,8 @@ void GLWidget::initializeGL()
     glClearColor(0, 0, 0, 1);
     m_program = new QOpenGLShaderProgram;
     std::cout << QDir::currentPath().toStdString() << std::endl;
-    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex,"resource/shader/vertex.vert");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment,"resource/shader/fragment.frag");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex,"resources/shader/vertex.vert");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment,"resources/shader/fragment.frag");
     m_program->link();
     m_program->bind();
 

@@ -3,97 +3,45 @@
 #include <cmath>
 #include "glm/glm.hpp"
 
+// Constructor
 TerrainGenerator::TerrainGenerator()
 {
-    // Task 8: Turn of wireframe shading
-    m_wireshade = true;
+  // Task 8: turn off wireframe shading
+  m_wireshade = true; // STENCIL CODE
+  // m_wireshade = false; // TA SOLUTION
 
-    // Define resolution of terrain generation
-    m_resolution = 100;
+  // Define resolution of terrain generation
+  m_resolution = 100;
 
-    // Generate random vector lookup table
-    m_lookupSize = 1024;
-    m_randVecLookup.reserve(m_lookupSize);
+  // Generate random vector lookup table
+  m_lookupSize = 1024;
+  m_randVecLookup.reserve(m_lookupSize);
 
-    std::srand(1);
+  // Initialize random number generator
+  std::srand(1230);
 
-    for(int i = 0; i < m_lookupSize; i++)
-    {
-        m_randVecLookup.push_back(glm::vec2(std::rand() * 2.0 / RAND_MAX - 1.0,std::rand() * 2.0 / RAND_MAX - 1.0));
+  // Populate random vector lookup table
+  for (int i = 0; i < m_lookupSize; i++)
+  {
+    m_randVecLookup.push_back(glm::vec2(std::rand() * 2.0 / RAND_MAX - 1.0,
+                                        std::rand() * 2.0 / RAND_MAX - 1.0));
     }
 }
 
+// Destructor
 TerrainGenerator::~TerrainGenerator()
 {
     m_randVecLookup.clear();
 }
 
-// Samples the infinite grid of random vectors at specified location
-glm::vec2 TerrainGenerator::randVec(int row, int col)
-{
-    std::hash<int> intHash;
-    int index = intHash(row * 41 + col * 43) % m_lookupSize;
-    return m_randVecLookup.at(index);
-}
-
-float interpolate(float A, float B, float x) {
-    // Task 4: implement your eased interpolation function below!
-
-}
-
-
-float TerrainGenerator::computePerlin(float x, float y) {
-    // Task 1: Get grid indicies (as int)
-
-    // Task 2: Compute Offset Vectors
-
-    // Task 3: Compute Dot Product between Offset and Grid Vectors
-
-    // Task 5: Use your interpolation function to produce the final value
-    return 0;
-}
-
-glm::vec3 TerrainGenerator::getPosition(int row, int col) {
-    // normalize horizontal coordinates relative to unit square
-    // makes scaling independent of sampling resolution.
-    float x = 1.0 * row / m_resolution;
-    float y = 1.0 * col / m_resolution;
-    float z;
-
-    // Task 6: Modify this call to produce noise of a different frequency
-    z = computePerlin(5*x,5*y);
-
-    // Task 7: Combine multiple different octaves of noise to produce fractal perlin noise
-
-    return glm::vec3(x,y,z);
-}
-
-glm::vec3 TerrainGenerator::getNormal(int row, int col) {
-    // Task 9: Compute the average normal for the given input indicies
-
-    // return up as placeholder
-    return glm::vec3(0,0,1);
-}
-
-glm::vec3 TerrainGenerator::getColor(glm::vec3 normal, glm::vec3 position) {
-    // Task 10: Compute the Color as a function of the normal and position
-
-    // return white as placeholder
-    return glm::vec3(1,1,1);
-}
-
-int TerrainGenerator::getResolution()
-{
-    return m_resolution;
-}
-
+// Helper for generateTerrain()
 void addPointToVector(glm::vec3 point, std::vector<float>& vector) {
     vector.push_back(point.x);
     vector.push_back(point.y);
     vector.push_back(point.z);
 }
 
-// Uses position normal and color information to generate geometry
+// Generates the geometry of the output triangle mesh
 std::vector<float> TerrainGenerator::generateTerrain() {
     std::vector<float> verts;
     verts.reserve(m_resolution * m_resolution * 6);
@@ -152,3 +100,74 @@ std::vector<float> TerrainGenerator::generateTerrain() {
     return verts;
 }
 
+// Samples the (infinite) random vector grid at (row, col)
+glm::vec2 TerrainGenerator::sampleRandomVector(int row, int col)
+{
+    std::hash<int> intHash;
+    int index = intHash(row * 41 + col * 43) % m_lookupSize;
+    return m_randVecLookup.at(index);
+}
+
+// Takes a grid coordinate (row, col), [0, m_resolution), which describes a vertex in a plane mesh
+// Returns a normalized position (x, y, z); x and y in range from [0, 1), and z is obtained from getHeight()
+glm::vec3 TerrainGenerator::getPosition(int row, int col) {
+    // Normalizing the planar coordinates to a unit square 
+    // makes scaling independent of sampling resolution.
+    float x = 1.0 * row / m_resolution;
+    float y = 1.0 * col / m_resolution;
+    float z = getHeight(x, y);
+    return glm::vec3(x,y,z);
+}
+
+// ================== Students, please focus on the code below this point
+
+// Helper for computePerlin() and, possibly, getColor()
+float interpolate(float A, float B, float alpha) {
+    // Task 4: implement your easing/interpolation function below
+
+    // Return 0 as placeholder
+    return 0;
+}
+
+// Takes a normalized (x, y) position, in range [0,1)
+// Returns a height value, z, by sampling a noise function
+float TerrainGenerator::getHeight(float x, float y) {
+
+    // Task 6: modify this call to produce noise of a different frequency
+    float z = computePerlin(x * 5, y * 5) / 2;
+
+    // Task 7: combine multiple different octaves of noise to produce fractal perlin noise
+
+    // Return 0 as placeholder
+    return 0;
+}
+
+// Computes the normal of a vertex by averaging neighbors
+glm::vec3 TerrainGenerator::getNormal(int row, int col) {
+    // Task 9: Compute the average normal for the given input indices
+
+    // Return up as placeholder
+    return glm::vec3(0,0,1);
+}
+
+// Computes color of vertex using normal and, optionally, position
+glm::vec3 TerrainGenerator::getColor(glm::vec3 normal, glm::vec3 position) {
+    // Task 10: compute color as a function of the normal and position
+
+    // Return white as placeholder
+    return white;
+}
+
+// Computes the intensity of Perlin noise at some point
+float TerrainGenerator::computePerlin(float x, float y) {
+    // Task 1: get grid indices (as ints)
+
+    // Task 2: compute offset vectors
+
+    // Task 3: compute the dot product between offset and grid vectors
+
+    // Task 5: use your interpolation function to produce the final value
+
+    // Return 0 as a placeholder
+    return 0;
+}

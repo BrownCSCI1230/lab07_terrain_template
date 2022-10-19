@@ -10,29 +10,35 @@ public:
 
     TerrainGenerator();
     ~TerrainGenerator();
+    int getResolution() { return m_resolution; };
     std::vector<float> generateTerrain();
-    int getResolution();
 
 private:
 
-    // Member variables for terrain generation, you will not need to use these
+    // Member variables for terrain generation. You will not need to use these directly.
     std::vector<glm::vec2> m_randVecLookup;
     int m_resolution;
     int m_lookupSize;
 
-    // Takes vertex x and y integer coordinate of terrain mesh
-    // Returns position within 1x1 unit square with height sampled from noise functions
-    glm::vec3 getPosition(int x, int y);
+    // Samples the (infinite) random vector grid at (row, col)
+    glm::vec2 sampleRandomVector(int row, int col);
 
-    // Computes the Normal of a vertex by averaging neighbors
-    glm::vec3 getNormal(int x, int y);
+    // Takes a grid coordinate (row, col), [0, m_resolution), which describes a vertex in a plane mesh
+    // Returns a normalized position (x, y, z); x and y in range from [0, 1), and z is obtained from getHeight()
+    glm::vec3 getPosition(int row, int col);
 
-    // Computes Color of vertex using normal and optionally position
-    glm::vec3 getColor(glm::vec3 normal,glm::vec3 position);
+    // ================== Students, please focus on the code below this point
 
-    // Samples Infinite Random Vector Grid at integer row and col
-    glm::vec2 randVec(int row, int col);
+    // Takes a normalized (x, y) position, in range [0,1)
+    // Returns a height value, z, by sampling a noise function
+    float getHeight(float x, float y);
 
-    // Computes Perlin noise at a point in the infinite vertex grid
+    // Computes the normal of a vertex by averaging neighbors
+    glm::vec3 getNormal(int row, int col);
+
+    // Computes color of vertex using normal and, optionally, position
+    glm::vec3 getColor(glm::vec3 normal, glm::vec3 position);
+
+    // Computes the intensity of Perlin noise at some point
     float computePerlin(float x, float y);
 };
