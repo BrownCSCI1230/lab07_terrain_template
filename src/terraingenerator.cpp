@@ -139,7 +139,7 @@ float TerrainGenerator::getHeight(float x, float y) {
     // Task 7: combine multiple different octaves of noise to produce fractal perlin noise
 
     // Return 0 as placeholder
-    return 0;
+    return z;
 }
 
 // Computes the normal of a vertex by averaging neighbors
