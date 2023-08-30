@@ -165,8 +165,13 @@ float TerrainGenerator::computePerlin(float x, float y) {
     // Task 2: compute offset vectors
 
     // Task 3: compute the dot product between offset and grid vectors
+//    float A = ... // dot product for (x, y)
+//    float B = ... // dot product for (x+1, y)
+//    float C = ... // dot product for (x+1, y+1)
+//    float D = ... // dot product for (x, y+1)
 
-    // Task 5: use your interpolation function to produce the final value
+    // Task 5: Debug this line to properly use your interpolation function to produce the correct value
+//    return interpolate(interpolate(A, B, 0.5), interpolate(D, C, 0.5), 0.5);
 
     // Return 0 as a placeholder
     return 0;
