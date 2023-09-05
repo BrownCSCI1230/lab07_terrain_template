@@ -164,11 +164,11 @@ float TerrainGenerator::computePerlin(float x, float y) {
 
     // Task 2: compute offset vectors
 
-    // Task 3: compute the dot product between offset and grid vectors directions
-// float A = ... // dot product between top left direction and its offset
-// float B = ... // dot product between top right direction and its offset
-// float C = ... // dot product between bottom right direction and its offset
-// float C = ... // dot product between bottom right direction and its offset
+    // Task 3: compute the dot product between the grid point direction vectors and its offset vectors
+// float A = ... // dot product between top-left direction and its offset
+// float B = ... // dot product between top-right direction and its offset
+// float C = ... // dot product between bottom-right direction and its offset
+// float D = ... // dot product between bottom-left direction and its offset
 
     // Task 5: Debug this line to properly use your interpolation function to produce the correct value
 //    return interpolate(interpolate(A, B, 0.5), interpolate(D, C, 0.5), 0.5);
